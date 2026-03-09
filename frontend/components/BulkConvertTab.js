@@ -4,7 +4,6 @@ import {
     Button,
     FieldPickerSynced,
     FormField,
-    Heading,
     Icon,
     ProgressBar,
     Select,
@@ -50,8 +49,8 @@ export default function BulkConvertTab() {
     const [statusMessage, setStatusMessage] = useState('');
     const [log, setLog] = useState([]);
 
-    function addLogEntry(message, type = 'info') {
-        setLog(prev => [...prev, {message, type, time: new Date().toLocaleTimeString()}]);
+    function addLogEntry(message, type) {
+        setLog(prev => [...prev, {message, type: type || 'info', time: new Date().toLocaleTimeString()}]);
     }
 
     async function uploadFileFromUrl(fileUrl, fileName) {
@@ -74,7 +73,7 @@ export default function BulkConvertTab() {
 
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
-            throw new Error(errData.message || `Upload failed (${response.status})`);
+            throw new Error(errData.message || 'Upload failed (' + response.status + ')');
         }
 
         const data = await response.json();
@@ -120,15 +119,15 @@ export default function BulkConvertTab() {
             return;
         }
 
-        addLogEntry(`Starting bulk conversion of ${recordsWithAttachments.length} records...`);
+        addLogEntry('Starting bulk conversion of ' + recordsWithAttachments.length + ' records...');
 
-        let successTotal = 0;
-        let errorTotal = 0;
+        var successTotal = 0;
+        var errorTotal = 0;
 
         // Process records and batch updates
         const updates = [];
 
-        for (let i = 0; i < recordsWithAttachments.length; i++) {
+        for (var i = 0; i < recordsWithAttachments.length; i++) {
             const record = recordsWithAttachments[i];
             const attachments = record.getCellValue(sourceFieldId);
             const recordName = record.name || record.id;
@@ -136,7 +135,8 @@ export default function BulkConvertTab() {
             try {
                 // Upload each attachment and collect URLs
                 const urls = [];
-                for (const attachment of attachments) {
+                for (var j = 0; j < attachments.length; j++) {
+                    const attachment = attachments[j];
                     const publicUrl = await uploadFileFromUrl(
                         attachment.url,
                         attachment.filename || 'file'
@@ -145,12 +145,14 @@ export default function BulkConvertTab() {
                 }
 
                 // Determine value based on destination field type
-                let cellValue;
+                var cellValue;
                 if (destField.type === FieldType.MULTIPLE_ATTACHMENTS) {
-                    cellValue = urls.map((url, idx) => ({
-                        url,
-                        filename: attachments[idx]?.filename || 'file',
-                    }));
+                    cellValue = urls.map(function(url, idx) {
+                        return {
+                            url: url,
+                            filename: attachments[idx] ? attachments[idx].filename : 'file',
+                        };
+                    });
                 } else {
                     // URL or text field — join multiple URLs with newlines
                     cellValue = urls.join('\n');
@@ -162,10 +164,10 @@ export default function BulkConvertTab() {
                 });
 
                 successTotal++;
-                addLogEntry(`${recordName}: ${urls.length} file(s) uploaded`, 'success');
+                addLogEntry(recordName + ': ' + urls.length + ' file(s) uploaded', 'success');
             } catch (err) {
                 errorTotal++;
-                addLogEntry(`${recordName}: ${err.message}`, 'error');
+                addLogEntry(recordName + ': ' + err.message, 'error');
             }
 
             setProgress(i + 1);
@@ -175,20 +177,20 @@ export default function BulkConvertTab() {
 
         // Batch update records (max 50 at a time)
         if (updates.length > 0) {
-            addLogEntry(`Writing ${updates.length} records to destination field...`);
+            addLogEntry('Writing ' + updates.length + ' records to destination field...');
             try {
-                for (let i = 0; i < updates.length; i += MAX_RECORDS_PER_UPDATE) {
-                    const batch = updates.slice(i, i + MAX_RECORDS_PER_UPDATE);
+                for (var k = 0; k < updates.length; k += MAX_RECORDS_PER_UPDATE) {
+                    const batch = updates.slice(k, k + MAX_RECORDS_PER_UPDATE);
                     await selectedTable.updateRecordsAsync(batch);
                 }
-                addLogEntry(`All records updated successfully!`, 'success');
+                addLogEntry('All records updated successfully!', 'success');
             } catch (err) {
-                addLogEntry(`Error writing records: ${err.message}`, 'error');
+                addLogEntry('Error writing records: ' + err.message, 'error');
             }
         }
 
         setStatusMessage(
-            `Done! ${successTotal} succeeded, ${errorTotal} failed out of ${recordsWithAttachments.length} records.`
+            'Done! ' + successTotal + ' succeeded, ' + errorTotal + ' failed out of ' + recordsWithAttachments.length + ' records.'
         );
         setConverting(false);
     }
@@ -224,7 +226,7 @@ export default function BulkConvertTab() {
             </Box>
 
             {selectedTable && (
-                <>
+                <React.Fragment>
                     {/* Source Field (Attachments) */}
                     <Box marginBottom={3}>
                         <FormField label="Source attachment field">
@@ -253,7 +255,7 @@ export default function BulkConvertTab() {
                             />
                         </FormField>
                     </Box>
-                </>
+                </React.Fragment>
             )}
 
             {/* Expiry */}
@@ -272,7 +274,7 @@ export default function BulkConvertTab() {
                 <Box marginBottom={3}>
                     <Text textColor="light" size="small">
                         {records.length} records in table
-                        {' · '}
+                        {' \u00b7 '}
                         {records.filter(r => {
                             const v = r.getCellValue(sourceFieldId);
                             return v && v.length > 0;
@@ -300,8 +302,8 @@ export default function BulkConvertTab() {
                     <ProgressBar progress={progressFraction} barColor="#2563eb" />
                     <Text size="small" textColor="light" marginTop={1}>
                         {progress} / {totalToConvert} records processed
-                        {successCount > 0 && ` · ${successCount} succeeded`}
-                        {errorCount > 0 && ` · ${errorCount} failed`}
+                        {successCount > 0 ? ' \u00b7 ' + successCount + ' succeeded' : ''}
+                        {errorCount > 0 ? ' \u00b7 ' + errorCount + ' failed' : ''}
                     </Text>
                 </Box>
             )}

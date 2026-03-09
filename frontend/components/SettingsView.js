@@ -48,7 +48,7 @@ export default function SettingsView({onClose}) {
                 {
                     method: 'GET',
                     headers: {
-                        Accept: 'application/json',
+                        'Accept': 'application/json',
                         'x-api-key': apiKey.trim(),
                     },
                 }
@@ -63,9 +63,9 @@ export default function SettingsView({onClose}) {
                 setValidationState('invalid');
                 setErrorMessage('Invalid API key');
             }
-        } catch (err) {
+        } catch (error) {
             setValidationState('invalid');
-            setErrorMessage('Failed to verify API key. Please check your connection.');
+            setErrorMessage(error.message || 'Failed to verify API key. Please check your connection.');
         }
     }
 
