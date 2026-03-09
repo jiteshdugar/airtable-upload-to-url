@@ -49,7 +49,11 @@ export default function BulkConvertTab() {
         : null;
 
     // Only load the fields we need to limit data loaded
-    const fieldsToLoad = [sourceFieldId, destFieldId].filter(Boolean);
+    // Validate that field IDs exist in the selected table to avoid errors when
+    // switching tables while stale field IDs are stored in globalConfig.
+    const fieldsToLoad = [sourceFieldId, destFieldId].filter(
+        (fieldId) => fieldId && selectedTable && selectedTable.getFieldByIdIfExists(fieldId)
+    );
     const recordQueryOpts = fieldsToLoad.length > 0 ? {fields: fieldsToLoad} : {fields: []};
     const records = useRecords(selectedView || selectedTable, recordQueryOpts);
 
