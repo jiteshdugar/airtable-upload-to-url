@@ -1,0 +1,11 @@
+{
+    "name": "upload-to-url",
+    "version": "1.0.0",
+    "description": "Upload files and get public URLs. Bulk convert Airtable attachments to stable public URLs via UploadToURL.",
+    "license": "MIT",
+    "dependencies": {
+        "@airtable/blocks": "^1.5.1",
+        "react": "^16.9.0",
+        "react-dom": "^16.9.0"
+    }
+}

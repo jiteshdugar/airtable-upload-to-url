@@ -1,0 +1,4 @@
+node_modules/
+.block/
+build/
+.DS_Store
