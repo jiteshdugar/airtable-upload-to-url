@@ -134,7 +134,13 @@ export default function UploadTab() {
 
             if (!response.ok) {
                 const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.message || `Upload failed (${response.status})`);
+                const errMsg = errData.message || errData.error || errData.detail || JSON.stringify(errData);
+                if (response.status === 429) {
+                    throw new Error(`Rate limit exceeded: ${errMsg}`);
+                } else if (response.status === 402 || response.status === 403) {
+                    throw new Error(`API credits exhausted or unauthorized: ${errMsg}`);
+                }
+                throw new Error(errMsg || `Upload failed (${response.status})`);
             }
 
             const data = await response.json();
