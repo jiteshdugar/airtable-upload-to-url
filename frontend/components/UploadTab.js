@@ -35,7 +35,9 @@ export default function UploadTab() {
     const destFieldId = globalConfig.get('destUrlFieldId');
 
     // Only load the fields we actually need (destination field) to limit data loaded
-    const recordQueryOpts = destFieldId ? {fields: [destFieldId]} : {fields: []};
+    // Validate field exists in table to avoid errors from stale globalConfig values
+    const destFieldExists = destFieldId && activeTable && activeTable.getFieldByIdIfExists(destFieldId);
+    const recordQueryOpts = destFieldExists ? {fields: [destFieldId]} : {fields: []};
     const records = useRecords(activeTable, recordQueryOpts);
 
     // Check if user has permission to update records
