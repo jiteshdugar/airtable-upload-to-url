@@ -8,8 +8,10 @@ import {
     Icon,
     ProgressBar,
     Select,
+    Switch,
     TablePickerSynced,
     Text,
+    ViewPickerSynced,
     useBase,
     useGlobalConfig,
     useRecords,
@@ -34,14 +36,20 @@ export default function BulkConvertTab() {
     const selectedTableId = globalConfig.get('bulkTableId');
     const sourceFieldId = globalConfig.get('bulkSourceFieldId');
     const destFieldId = globalConfig.get('bulkDestFieldId');
+    const selectedViewId = globalConfig.get('bulkViewId');
 
     const selectedTable = selectedTableId
         ? base.getTableByIdIfExists(selectedTableId)
         : null;
 
-    const records = useRecords(selectedTable);
+    const selectedView = selectedTable && selectedViewId
+        ? selectedTable.getViewByIdIfExists(selectedViewId)
+        : null;
+
+    const records = useRecords(selectedView || selectedTable);
 
     const [expiry, setExpiry] = useState(defaultExpiry);
+    const [skipExisting, setSkipExisting] = useState(true);
     const [converting, setConverting] = useState(false);
     const [progress, setProgress] = useState(0);
     const [totalToConvert, setTotalToConvert] = useState(0);
@@ -109,7 +117,15 @@ export default function BulkConvertTab() {
         // Filter records that have attachments in the source field
         const recordsWithAttachments = records.filter(record => {
             const attachments = record.getCellValue(sourceFieldId);
-            return attachments && attachments.length > 0;
+            if (!attachments || attachments.length === 0) return false;
+            // Optionally skip records that already have a value in the destination field
+            if (skipExisting) {
+                const destValue = record.getCellValue(destFieldId);
+                if (destValue && (Array.isArray(destValue) ? destValue.length > 0 : destValue.toString().trim() !== '')) {
+                    return false;
+                }
+            }
+            return true;
         });
 
         setTotalToConvert(recordsWithAttachments.length);
@@ -223,6 +239,19 @@ export default function BulkConvertTab() {
                 </FormField>
             </Box>
 
+            {/* View Picker */}
+            {selectedTable && (
+                <Box marginBottom={3}>
+                    <FormField label="Select view (optional)">
+                        <ViewPickerSynced
+                            table={selectedTable}
+                            globalConfigKey="bulkViewId"
+                            shouldAllowPickingNone={true}
+                        />
+                    </FormField>
+                </Box>
+            )}
+
             {selectedTable && (
                 <>
                     {/* Source Field (Attachments) */}
@@ -267,17 +296,42 @@ export default function BulkConvertTab() {
                 </FormField>
             </Box>
 
+            {/* Skip existing toggle */}
+            {selectedTable && destFieldId && (
+                <Box marginBottom={3}>
+                    <Switch
+                        value={skipExisting}
+                        onChange={value => setSkipExisting(value)}
+                        label="Skip records that already have a destination value"
+                    />
+                </Box>
+            )}
+
             {/* Record count info */}
             {records && selectedTable && sourceFieldId && (
                 <Box marginBottom={3}>
                     <Text textColor="light" size="small">
-                        {records.length} records in table
+                        {records.length} records{selectedView ? ' in view' : ' in table'}
                         {' · '}
-                        {records.filter(r => {
-                            const v = r.getCellValue(sourceFieldId);
-                            return v && v.length > 0;
-                        }).length}{' '}
-                        with attachments
+                        {(() => {
+                            const withAttachments = records.filter(r => {
+                                const v = r.getCellValue(sourceFieldId);
+                                return v && v.length > 0;
+                            }).length;
+                            const toConvert = skipExisting && destFieldId
+                                ? records.filter(r => {
+                                    const v = r.getCellValue(sourceFieldId);
+                                    if (!v || v.length === 0) return false;
+                                    const dv = r.getCellValue(destFieldId);
+                                    if (dv && (Array.isArray(dv) ? dv.length > 0 : dv.toString().trim() !== '')) return false;
+                                    return true;
+                                }).length
+                                : withAttachments;
+                            return `${withAttachments} with attachments` +
+                                (skipExisting && destFieldId && toConvert !== withAttachments
+                                    ? ` · ${toConvert} to convert`
+                                    : '');
+                        })()}
                     </Text>
                 </Box>
             )}
