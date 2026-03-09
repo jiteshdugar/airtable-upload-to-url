@@ -4,10 +4,8 @@ import {
     Button,
     FieldPickerSynced,
     FormField,
-    Heading,
     Icon,
     Input,
-    RecordCardList,
     Select,
     Text,
     useBase,
@@ -38,7 +36,6 @@ export default function UploadTab() {
     const [file, setFile] = useState(null);
     const [expiry, setExpiry] = useState(defaultExpiry);
     const [customDate, setCustomDate] = useState('');
-    const [destinationMode, setDestinationMode] = useState('url'); // 'url' or 'attachment'
     const [uploading, setUploading] = useState(false);
     const [resultUrl, setResultUrl] = useState('');
     const [resultMessage, setResultMessage] = useState('');
@@ -137,7 +134,15 @@ export default function UploadTab() {
 
             if (!response.ok) {
                 const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.message || `Upload failed (${response.status})`);
+                const errMsg = errData.message || errData.error || errData.detail || JSON.stringify(errData);
+                if (response.status === 413) {
+                    throw new Error(`File too large: ${errMsg}`);
+                } else if (response.status === 429) {
+                    throw new Error(`Rate limit exceeded: ${errMsg}`);
+                } else if (response.status === 402 || response.status === 403) {
+                    throw new Error(`API credits exhausted or unauthorized: ${errMsg}`);
+                }
+                throw new Error(errMsg || `Upload failed (${response.status})`);
             }
 
             const data = await response.json();
@@ -145,30 +150,15 @@ export default function UploadTab() {
             setResultUrl(publicUrl);
 
             // Write to record if one is selected and a destination field is configured
-            const destFieldId = globalConfig.get(
-                destinationMode === 'url' ? 'destUrlFieldId' : 'destAttachmentFieldId'
-            );
+            const destFieldId = globalConfig.get('destUrlFieldId');
 
             if (selectedRecordId && destFieldId && activeTable) {
                 const field = activeTable.getFieldByIdIfExists(destFieldId);
                 if (field) {
-                    if (destinationMode === 'url') {
-                        await activeTable.updateRecordAsync(selectedRecordId, {
-                            [destFieldId]: publicUrl,
-                        });
-                        setResultMessage('URL written to record successfully!');
-                    } else {
-                        // Attachment mode — use the public URL
-                        const existingAttachments =
-                            selectedRecord.getCellValue(destFieldId) || [];
-                        await activeTable.updateRecordAsync(selectedRecordId, {
-                            [destFieldId]: [
-                                ...existingAttachments,
-                                {url: publicUrl, filename: file.name},
-                            ],
-                        });
-                        setResultMessage('File attached to record successfully!');
-                    }
+                    await activeTable.updateRecordAsync(selectedRecordId, {
+                        [destFieldId]: publicUrl,
+                    });
+                    setResultMessage('URL written to record successfully!');
                 } else {
                     setResultMessage('Upload complete! Select a destination field to save to record.');
                 }
@@ -209,7 +199,10 @@ export default function UploadTab() {
                     <Select
                         options={[{value: '', label: 'Choose a record...'}, ...recordOptions]}
                         value={selectedRecordId || ''}
-                        onChange={value => setSelectedRecordId(value || null)}
+                        onChange={value => {
+                            setSelectedRecordId(value || null);
+                            setResultMessage('');
+                        }}
                     />
                 </FormField>
             </Box>
@@ -274,52 +267,19 @@ export default function UploadTab() {
                 )}
             </Box>
 
-            {/* Destination Mode Toggle */}
-            <Box marginBottom={3}>
-                <FormField label="Save URL to record as">
-                    <Box display="flex">
-                        <Button
-                            onClick={() => setDestinationMode('url')}
-                            variant={destinationMode === 'url' ? 'primary' : 'secondary'}
-                            size="small"
-                            marginRight={1}
-                        >
-                            URL Field
-                        </Button>
-                        <Button
-                            onClick={() => setDestinationMode('attachment')}
-                            variant={destinationMode === 'attachment' ? 'primary' : 'secondary'}
-                            size="small"
-                        >
-                            Attachment Field
-                        </Button>
-                    </Box>
-                </FormField>
-
-                {activeTable && (
-                    <Box marginTop={1}>
-                        {destinationMode === 'url' ? (
-                            <FormField label="Destination URL field">
-                                <FieldPickerSynced
-                                    table={activeTable}
-                                    globalConfigKey="destUrlFieldId"
-                                    allowedTypes={[FieldType.URL, FieldType.SINGLE_LINE_TEXT]}
-                                    placeholder="Pick a URL or text field"
-                                />
-                            </FormField>
-                        ) : (
-                            <FormField label="Destination attachment field">
-                                <FieldPickerSynced
-                                    table={activeTable}
-                                    globalConfigKey="destAttachmentFieldId"
-                                    allowedTypes={[FieldType.MULTIPLE_ATTACHMENTS]}
-                                    placeholder="Pick an attachment field"
-                                />
-                            </FormField>
-                        )}
-                    </Box>
-                )}
-            </Box>
+            {/* Destination Field */}
+            {activeTable && (
+                <Box marginBottom={3}>
+                    <FormField label="Save URL to record">
+                        <FieldPickerSynced
+                            table={activeTable}
+                            globalConfigKey="destUrlFieldId"
+                            allowedTypes={[FieldType.URL, FieldType.SINGLE_LINE_TEXT]}
+                            placeholder="Pick a URL or text field"
+                        />
+                    </FormField>
+                </Box>
+            )}
 
             {/* Upload Button */}
             <Box marginBottom={3}>
