@@ -337,7 +337,7 @@ export default function BulkConvertTab() {
             )}
 
             {/* Record count info */}
-            {records && selectedTable && sourceFieldId && (
+            {records && selectedTable && sourceFieldId && selectedTable.getFieldByIdIfExists(sourceFieldId) && (
                 <Box marginBottom={3}>
                     <Text textColor="light" size="small">
                         {records.length} records{selectedView ? ' in view' : ' in table'}
@@ -347,7 +347,7 @@ export default function BulkConvertTab() {
                                 const v = r.getCellValue(sourceFieldId);
                                 return v && v.length > 0;
                             }).length;
-                            const toConvert = skipExisting && destFieldId
+                            const toConvert = skipExisting && destFieldId && selectedTable.getFieldByIdIfExists(destFieldId)
                                 ? records.filter(r => {
                                     const v = r.getCellValue(sourceFieldId);
                                     if (!v || v.length === 0) return false;
@@ -357,7 +357,7 @@ export default function BulkConvertTab() {
                                 }).length
                                 : withAttachments;
                             return `${withAttachments} with attachments` +
-                                (skipExisting && destFieldId && toConvert !== withAttachments
+                                (skipExisting && destFieldId && selectedTable.getFieldByIdIfExists(destFieldId) && toConvert !== withAttachments
                                     ? ` · ${toConvert} to convert`
                                     : '');
                         })()}
