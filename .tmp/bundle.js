@@ -52275,7 +52275,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         return e;
       }
-      var ViewPickerSynced = (props, ref) => {
+      var ViewPickerSynced2 = (props, ref) => {
         var globalConfigKey = props.globalConfigKey, table = props.table, _onChange = props.onChange, disabled = props.disabled, restOfProps = (0, _objectWithoutProperties2.default)(props, _excluded);
         var _useSynced = (0, _use_synced.default)(globalConfigKey), _useSynced2 = (0, _slicedToArray2.default)(_useSynced, 3), viewId = _useSynced2[0], setViewId = _useSynced2[1], canSetViewId = _useSynced2[2];
         var sdk = (0, _sdk_context.useSdk)();
@@ -52300,7 +52300,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           disabled: disabled || !canSetViewId
         }));
       };
-      var ForwardedRefViewPickerSynced = /* @__PURE__ */ React7.forwardRef(ViewPickerSynced);
+      var ForwardedRefViewPickerSynced = /* @__PURE__ */ React7.forwardRef(ViewPickerSynced2);
       ForwardedRefViewPickerSynced.displayName = "ViewPickerSynced";
       ForwardedRefViewPickerSynced.propTypes = _objectSpread({
         globalConfigKey: _global_config_synced_component_helpers.default.globalConfigKeyPropType
@@ -57048,11 +57048,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       });
       var styleParser = (0, _core.compose)(_system.dimensionsSet, _system.flexItemSet, _system.positionSet, _system.margin);
       var recordCardListStylePropTypes = exports.recordCardListStylePropTypes = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _system.dimensionsSetPropTypes), _system.flexItemSetPropTypes), _system.positionSetPropTypes), _system.marginPropTypes);
-      var RecordCardList2 = exports.RecordCardList = /* @__PURE__ */ (function(_React$Component) {
-        function RecordCardList3(props) {
+      var RecordCardList = exports.RecordCardList = /* @__PURE__ */ (function(_React$Component) {
+        function RecordCardList2(props) {
           var _this;
-          (0, _classCallCheck2.default)(this, RecordCardList3);
-          _this = _callSuper(this, RecordCardList3, [props]);
+          (0, _classCallCheck2.default)(this, RecordCardList2);
+          _this = _callSuper(this, RecordCardList2, [props]);
           (0, _defineProperty2.default)(_this, "_container", void 0);
           (0, _defineProperty2.default)(_this, "_cardList", void 0);
           (0, _defineProperty2.default)(_this, "_cardListInnerWindow", void 0);
@@ -57083,8 +57083,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           };
           return _this;
         }
-        (0, _inherits2.default)(RecordCardList3, _React$Component);
-        return (0, _createClass2.default)(RecordCardList3, [{
+        (0, _inherits2.default)(RecordCardList2, _React$Component);
+        return (0, _createClass2.default)(RecordCardList2, [{
           key: "componentDidMount",
           value: function componentDidMount() {
             (0, _error_utils.invariant)(this._container.current, "No container to detect resize on");
@@ -57163,7 +57163,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           )
         }]);
       })(React7.Component);
-      (0, _defineProperty2.default)(RecordCardList2, "propTypes", {
+      (0, _defineProperty2.default)(RecordCardList, "propTypes", {
         records: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.instanceOf(_record.default), _propTypes.default.object])).isRequired,
         onScroll: _propTypes.default.func,
         onRecordClick: _propTypes.default.func,
@@ -57176,7 +57176,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         className: _propTypes.default.string,
         style: _propTypes.default.object
       });
-      var _default = exports.default = (0, _with_styled_system.default)(RecordCardList2, styleParser, recordCardListStylePropTypes);
+      var _default = exports.default = (0, _with_styled_system.default)(RecordCardList, styleParser, recordCardListStylePropTypes);
     }
   });
 
@@ -57619,7 +57619,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         "aria-describedby": _propTypes.default.string
       }, _tooltip_anchor_props.tooltipAnchorPropTypes), switchStylePropTypes);
       var styleParser = (0, _core.compose)(_system.maxWidth, _system.minWidth, _system.width, _system.flexItemSet, _system.positionSet, _system.spacingSet, _system.display, _system.backgroundColor);
-      var Switch = (props, ref) => {
+      var Switch2 = (props, ref) => {
         var disabled = props.disabled, id = props.id, label = props.label, _props$tabIndex = props.tabIndex, tabIndex = _props$tabIndex === void 0 ? 0 : _props$tabIndex, _props$variant = props.variant, variant = _props$variant === void 0 ? SwitchVariant.default : _props$variant, _props$size = props.size, size = _props$size === void 0 ? _control_sizes.ControlSize.default : _props$size, value = props.value, onClick = props.onClick, onChange = props.onChange, onMouseEnter = props.onMouseEnter, onMouseLeave = props.onMouseLeave, className = props.className, style = props.style, ariaLabel = props["aria-label"], ariaDescribedBy = props["aria-describedby"], ariaLabelledBy = props["aria-labelledby"], styleProps = (0, _objectWithoutProperties2.default)(props, _excluded);
         var classNameForStyleProps = (0, _use_styled_system.default)(_objectSpread({
           display: "flex",
@@ -57674,7 +57674,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           className: switchLabelClassName
         }, label));
       };
-      var ForwardedRefSwitch = /* @__PURE__ */ _react.default.forwardRef(Switch);
+      var ForwardedRefSwitch = /* @__PURE__ */ _react.default.forwardRef(Switch2);
       ForwardedRefSwitch.propTypes = _objectSpread({
         value: _propTypes.default.bool.isRequired
       }, sharedSwitchPropTypes);
@@ -59210,7 +59210,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         return (0, _use_styled_system.default)(styleProps);
       }
-      var Heading4 = (props, ref) => {
+      var Heading3 = (props, ref) => {
         var _props$as = props.as, Component = _props$as === void 0 ? "h3" : _props$as, _props$size = props.size, size = _props$size === void 0 ? HeadingSize.default : _props$size, _props$variant = props.variant, variant = _props$variant === void 0 ? HeadingVariant.default : _props$variant, children = props.children, id = props.id, role = props.role, dataAttributes = props.dataAttributes, className = props.className, style = props.style, ariaLabel = props["aria-label"], ariaLabelledBy = props["aria-labelledby"], ariaDescribedBy = props["aria-describedby"], ariaControls = props["aria-controls"], ariaExpanded = props["aria-expanded"], ariaHasPopup = props["aria-haspopup"], ariaHidden = props["aria-hidden"], ariaLive = props["aria-live"], styleProps = (0, _objectWithoutProperties2.default)(props, _excluded);
         var classNameForHeadingSize = useHeadingStyle(size, variant);
         var classNameForStyleProps = (0, _use_styled_system.default)(_objectSpread({
@@ -59233,7 +59233,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           "aria-live": ariaLive
         }, dataAttributes), children);
       };
-      var ForwardedRefHeading = /* @__PURE__ */ React7.forwardRef(Heading4);
+      var ForwardedRefHeading = /* @__PURE__ */ React7.forwardRef(Heading3);
       ForwardedRefHeading.propTypes = _objectSpread(_objectSpread({
         as: _propTypes.default.oneOf(["h1", "h2", "h3", "h4", "h5", "h6"]),
         size: headingSizePropType,
@@ -62006,7 +62006,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const [file, setFile] = (0, import_react.useState)(null);
     const [expiry, setExpiry] = (0, import_react.useState)(defaultExpiry);
     const [customDate, setCustomDate] = (0, import_react.useState)("");
-    const [destinationMode, setDestinationMode] = (0, import_react.useState)("url");
     const [uploading, setUploading] = (0, import_react.useState)(false);
     const [resultUrl, setResultUrl] = (0, import_react.useState)("");
     const [resultMessage, setResultMessage] = (0, import_react.useState)("");
@@ -62087,32 +62086,27 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.message || `Upload failed (${response.status})`);
+          const errMsg = errData.message || errData.error || errData.detail || JSON.stringify(errData);
+          if (response.status === 413) {
+            throw new Error(`File too large: ${errMsg}`);
+          } else if (response.status === 429) {
+            throw new Error(`Rate limit exceeded: ${errMsg}`);
+          } else if (response.status === 402 || response.status === 403) {
+            throw new Error(`API credits exhausted or unauthorized: ${errMsg}`);
+          }
+          throw new Error(errMsg || `Upload failed (${response.status})`);
         }
         const data = await response.json();
         const publicUrl = data.url;
         setResultUrl(publicUrl);
-        const destFieldId = globalConfig.get(
-          destinationMode === "url" ? "destUrlFieldId" : "destAttachmentFieldId"
-        );
+        const destFieldId = globalConfig.get("destUrlFieldId");
         if (selectedRecordId && destFieldId && activeTable) {
           const field = activeTable.getFieldByIdIfExists(destFieldId);
           if (field) {
-            if (destinationMode === "url") {
-              await activeTable.updateRecordAsync(selectedRecordId, {
-                [destFieldId]: publicUrl
-              });
-              setResultMessage("URL written to record successfully!");
-            } else {
-              const existingAttachments = selectedRecord.getCellValue(destFieldId) || [];
-              await activeTable.updateRecordAsync(selectedRecordId, {
-                [destFieldId]: [
-                  ...existingAttachments,
-                  { url: publicUrl, filename: file.name }
-                ]
-              });
-              setResultMessage("File attached to record successfully!");
-            }
+            await activeTable.updateRecordAsync(selectedRecordId, {
+              [destFieldId]: publicUrl
+            });
+            setResultMessage("URL written to record successfully!");
           } else {
             setResultMessage("Upload complete! Select a destination field to save to record.");
           }
@@ -62135,22 +62129,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { padding: 3, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Icon, { name: "settings", size: 24, marginBottom: 2 }, void 0, false, {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 195,
+          lineNumber: 185,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { size: "large", marginBottom: 2, children: "Setup Required" }, void 0, false, {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 196,
+          lineNumber: 186,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { textColor: "light", children: "Please configure your API key in Settings to start uploading." }, void 0, false, {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 197,
+          lineNumber: 187,
           columnNumber: 17
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 194,
+        lineNumber: 184,
         columnNumber: 13
       }, this);
     }
@@ -62160,23 +62154,26 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         {
           options: [{ value: "", label: "Choose a record..." }, ...recordOptions],
           value: selectedRecordId || "",
-          onChange: (value) => setSelectedRecordId(value || null)
+          onChange: (value) => {
+            setSelectedRecordId(value || null);
+            setResultMessage("");
+          }
         },
         void 0,
         false,
         {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 209,
+          lineNumber: 199,
           columnNumber: 21
         },
         this
       ) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 208,
+        lineNumber: 198,
         columnNumber: 17
       }, this) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 207,
+        lineNumber: 197,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.FormField, { label: "Upload a file", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
@@ -62202,7 +62199,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Icon, { name: "upload", size: 24, marginBottom: 1 }, void 0, false, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 239,
+              lineNumber: 232,
               columnNumber: 25
             }, this),
             file ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { fontWeight: "strong", children: [
@@ -62212,11 +62209,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               " KB)"
             ] }, void 0, true, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 241,
+              lineNumber: 234,
               columnNumber: 29
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { textColor: "light", children: "Drag & drop a file here, or click to browse" }, void 0, false, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 243,
+              lineNumber: 236,
               columnNumber: 29
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
@@ -62231,7 +62228,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               false,
               {
                 fileName: "frontend/components/UploadTab.js",
-                lineNumber: 247,
+                lineNumber: 240,
                 columnNumber: 25
               },
               this
@@ -62242,17 +62239,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         true,
         {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 220,
+          lineNumber: 213,
           columnNumber: 21
         },
         this
       ) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 219,
+        lineNumber: 212,
         columnNumber: 17
       }, this) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 218,
+        lineNumber: 211,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginBottom: 3, children: [
@@ -62267,13 +62264,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           false,
           {
             fileName: "frontend/components/UploadTab.js",
-            lineNumber: 260,
+            lineNumber: 253,
             columnNumber: 21
           },
           this
         ) }, void 0, false, {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 259,
+          lineNumber: 252,
           columnNumber: 17
         }, this),
         expiry === "custom" && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
@@ -62287,115 +62284,44 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           false,
           {
             fileName: "frontend/components/UploadTab.js",
-            lineNumber: 268,
+            lineNumber: 261,
             columnNumber: 25
           },
           this
         ) }, void 0, false, {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 267,
+          lineNumber: 260,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 258,
+        lineNumber: 251,
         columnNumber: 13
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginBottom: 3, children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.FormField, { label: "Save URL to record as", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { display: "flex", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-            import_ui.Button,
-            {
-              onClick: () => setDestinationMode("url"),
-              variant: destinationMode === "url" ? "primary" : "secondary",
-              size: "small",
-              marginRight: 1,
-              children: "URL Field"
-            },
-            void 0,
-            false,
-            {
-              fileName: "frontend/components/UploadTab.js",
-              lineNumber: 281,
-              columnNumber: 25
-            },
-            this
-          ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-            import_ui.Button,
-            {
-              onClick: () => setDestinationMode("attachment"),
-              variant: destinationMode === "attachment" ? "primary" : "secondary",
-              size: "small",
-              children: "Attachment Field"
-            },
-            void 0,
-            false,
-            {
-              fileName: "frontend/components/UploadTab.js",
-              lineNumber: 289,
-              columnNumber: 25
-            },
-            this
-          )
-        ] }, void 0, true, {
+      activeTable && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.FormField, { label: "Save URL to record", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+        import_ui.FieldPickerSynced,
+        {
+          table: activeTable,
+          globalConfigKey: "destUrlFieldId",
+          allowedTypes: [import_models.FieldType.URL, import_models.FieldType.SINGLE_LINE_TEXT],
+          placeholder: "Pick a URL or text field"
+        },
+        void 0,
+        false,
+        {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 280,
-          columnNumber: 21
-        }, this) }, void 0, false, {
-          fileName: "frontend/components/UploadTab.js",
-          lineNumber: 279,
-          columnNumber: 17
-        }, this),
-        activeTable && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginTop: 1, children: destinationMode === "url" ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.FormField, { label: "Destination URL field", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-          import_ui.FieldPickerSynced,
-          {
-            table: activeTable,
-            globalConfigKey: "destUrlFieldId",
-            allowedTypes: [import_models.FieldType.URL, import_models.FieldType.SINGLE_LINE_TEXT],
-            placeholder: "Pick a URL or text field"
-          },
-          void 0,
-          false,
-          {
-            fileName: "frontend/components/UploadTab.js",
-            lineNumber: 303,
-            columnNumber: 33
-          },
-          this
-        ) }, void 0, false, {
-          fileName: "frontend/components/UploadTab.js",
-          lineNumber: 302,
-          columnNumber: 29
-        }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.FormField, { label: "Destination attachment field", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-          import_ui.FieldPickerSynced,
-          {
-            table: activeTable,
-            globalConfigKey: "destAttachmentFieldId",
-            allowedTypes: [import_models.FieldType.MULTIPLE_ATTACHMENTS],
-            placeholder: "Pick an attachment field"
-          },
-          void 0,
-          false,
-          {
-            fileName: "frontend/components/UploadTab.js",
-            lineNumber: 312,
-            columnNumber: 33
-          },
-          this
-        ) }, void 0, false, {
-          fileName: "frontend/components/UploadTab.js",
-          lineNumber: 311,
-          columnNumber: 29
-        }, this) }, void 0, false, {
-          fileName: "frontend/components/UploadTab.js",
-          lineNumber: 300,
-          columnNumber: 21
-        }, this)
-      ] }, void 0, true, {
+          lineNumber: 274,
+          columnNumber: 25
+        },
+        this
+      ) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 278,
-        columnNumber: 13
+        lineNumber: 273,
+        columnNumber: 21
+      }, this) }, void 0, false, {
+        fileName: "frontend/components/UploadTab.js",
+        lineNumber: 272,
+        columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
         import_ui.Button,
@@ -62411,13 +62337,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         false,
         {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 326,
+          lineNumber: 286,
           columnNumber: 17
         },
         this
       ) }, void 0, false, {
         fileName: "frontend/components/UploadTab.js",
-        lineNumber: 325,
+        lineNumber: 285,
         columnNumber: 13
       }, this),
       error && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
@@ -62430,13 +62356,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { textColor: "#ef4444", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Icon, { name: "warning", size: 12, marginRight: 1 }, void 0, false, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 346,
+              lineNumber: 306,
               columnNumber: 25
             }, this),
             error
           ] }, void 0, true, {
             fileName: "frontend/components/UploadTab.js",
-            lineNumber: 345,
+            lineNumber: 305,
             columnNumber: 21
           }, this)
         },
@@ -62444,7 +62370,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         false,
         {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 339,
+          lineNumber: 299,
           columnNumber: 17
         },
         this
@@ -62459,13 +62385,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { fontWeight: "strong", marginBottom: 1, children: "Public URL" }, void 0, false, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 360,
+              lineNumber: 320,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { display: "flex", alignItems: "center", marginBottom: 2, children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Input, { value: resultUrl, readOnly: true, flex: "1" }, void 0, false, {
                 fileName: "frontend/components/UploadTab.js",
-                lineNumber: 364,
+                lineNumber: 324,
                 columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
@@ -62482,30 +62408,30 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                 false,
                 {
                   fileName: "frontend/components/UploadTab.js",
-                  lineNumber: 365,
+                  lineNumber: 325,
                   columnNumber: 25
                 },
                 this
               )
             ] }, void 0, true, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 363,
+              lineNumber: 323,
               columnNumber: 21
             }, this),
             resultMessage && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Box, { display: "flex", alignItems: "center", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Icon, { name: "check", size: 16, fillColor: "#22c55e" }, void 0, false, {
                 fileName: "frontend/components/UploadTab.js",
-                lineNumber: 377,
+                lineNumber: 337,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_ui.Text, { textColor: "#22c55e", marginLeft: 1, children: resultMessage }, void 0, false, {
                 fileName: "frontend/components/UploadTab.js",
-                lineNumber: 378,
+                lineNumber: 338,
                 columnNumber: 29
               }, this)
             ] }, void 0, true, {
               fileName: "frontend/components/UploadTab.js",
-              lineNumber: 376,
+              lineNumber: 336,
               columnNumber: 25
             }, this)
           ]
@@ -62514,14 +62440,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         true,
         {
           fileName: "frontend/components/UploadTab.js",
-          lineNumber: 354,
+          lineNumber: 314,
           columnNumber: 17
         },
         this
       )
     ] }, void 0, true, {
       fileName: "frontend/components/UploadTab.js",
-      lineNumber: 205,
+      lineNumber: 195,
       columnNumber: 9
     }, this);
   }
@@ -62552,9 +62478,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const selectedTableId = globalConfig.get("bulkTableId");
     const sourceFieldId = globalConfig.get("bulkSourceFieldId");
     const destFieldId = globalConfig.get("bulkDestFieldId");
+    const selectedViewId = globalConfig.get("bulkViewId");
     const selectedTable = selectedTableId ? base.getTableByIdIfExists(selectedTableId) : null;
-    const records = (0, import_ui2.useRecords)(selectedTable);
+    const selectedView = selectedTable && selectedViewId ? selectedTable.getViewByIdIfExists(selectedViewId) : null;
+    const records = (0, import_ui2.useRecords)(selectedView || selectedTable);
     const [expiry, setExpiry] = (0, import_react2.useState)(defaultExpiry);
+    const [skipExisting, setSkipExisting] = (0, import_react2.useState)(true);
     const [converting, setConverting] = (0, import_react2.useState)(false);
     const [progress, setProgress] = (0, import_react2.useState)(0);
     const [totalToConvert, setTotalToConvert] = (0, import_react2.useState)(0);
@@ -62581,7 +62510,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       });
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.message || `Upload failed (${response.status})`);
+        const errMsg = errData.message || errData.error || errData.detail || JSON.stringify(errData);
+        if (response.status === 413) {
+          throw new Error(`File too large: ${errMsg}`);
+        } else if (response.status === 429) {
+          throw new Error(`Rate limit exceeded: ${errMsg}`);
+        } else if (response.status === 402 || response.status === 403) {
+          throw new Error(`API credits exhausted or unauthorized: ${errMsg}`);
+        }
+        throw new Error(errMsg || `Upload failed (${response.status})`);
       }
       const data = await response.json();
       return data.url;
@@ -62608,7 +62545,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       setLog([]);
       const recordsWithAttachments = records.filter((record) => {
         const attachments = record.getCellValue(sourceFieldId);
-        return attachments && attachments.length > 0;
+        if (!attachments || attachments.length === 0) return false;
+        if (skipExisting) {
+          const destValue = record.getCellValue(destFieldId);
+          if (destValue && (Array.isArray(destValue) ? destValue.length > 0 : destValue.toString().trim() !== "")) {
+            return false;
+          }
+        }
+        return true;
       });
       setTotalToConvert(recordsWithAttachments.length);
       if (recordsWithAttachments.length === 0) {
@@ -62677,22 +62621,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { padding: 3, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Icon, { name: "settings", size: 24, marginBottom: 2 }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 199,
+          lineNumber: 223,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { size: "large", marginBottom: 2, children: "Setup Required" }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 200,
+          lineNumber: 224,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { textColor: "light", children: "Please configure your API key in Settings to start converting." }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 201,
+          lineNumber: 225,
           columnNumber: 17
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 198,
+        lineNumber: 222,
         columnNumber: 13
       }, this);
     }
@@ -62701,31 +62645,55 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 2, children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { size: "large", fontWeight: "strong", children: "Bulk Convert Attachments to URLs" }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 213,
+          lineNumber: 237,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { textColor: "light", marginTop: 1, children: "Convert all attachments in a field to stable public URLs via UploadToURL." }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 214,
+          lineNumber: 238,
           columnNumber: 17
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 212,
+        lineNumber: 236,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.FormField, { label: "Select table", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.TablePickerSynced, { globalConfigKey: "bulkTableId" }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 222,
+        lineNumber: 246,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 221,
+        lineNumber: 245,
         columnNumber: 17
       }, this) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 220,
+        lineNumber: 244,
         columnNumber: 13
+      }, this),
+      selectedTable && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.FormField, { label: "Select view (optional)", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
+        import_ui2.ViewPickerSynced,
+        {
+          table: selectedTable,
+          globalConfigKey: "bulkViewId",
+          shouldAllowPickingNone: true
+        },
+        void 0,
+        false,
+        {
+          fileName: "frontend/components/BulkConvertTab.js",
+          lineNumber: 254,
+          columnNumber: 25
+        },
+        this
+      ) }, void 0, false, {
+        fileName: "frontend/components/BulkConvertTab.js",
+        lineNumber: 253,
+        columnNumber: 21
+      }, this) }, void 0, false, {
+        fileName: "frontend/components/BulkConvertTab.js",
+        lineNumber: 252,
+        columnNumber: 17
       }, this),
       selectedTable && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_jsx_dev_runtime2.Fragment, { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.FormField, { label: "Source attachment field", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62740,17 +62708,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           false,
           {
             fileName: "frontend/components/BulkConvertTab.js",
-            lineNumber: 231,
+            lineNumber: 268,
             columnNumber: 29
           },
           this
         ) }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 230,
+          lineNumber: 267,
           columnNumber: 25
         }, this) }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 229,
+          lineNumber: 266,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.FormField, { label: "Destination field (for public URLs)", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62770,22 +62738,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           false,
           {
             fileName: "frontend/components/BulkConvertTab.js",
-            lineNumber: 243,
+            lineNumber: 280,
             columnNumber: 29
           },
           this
         ) }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 242,
+          lineNumber: 279,
           columnNumber: 25
         }, this) }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 241,
+          lineNumber: 278,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 227,
+        lineNumber: 264,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.FormField, { label: "Expiry for all uploads", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62799,36 +62767,65 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         false,
         {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 262,
+          lineNumber: 299,
           columnNumber: 21
         },
         this
       ) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 261,
+        lineNumber: 298,
         columnNumber: 17
       }, this) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 260,
+        lineNumber: 297,
         columnNumber: 13
+      }, this),
+      selectedTable && destFieldId && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
+        import_ui2.Switch,
+        {
+          value: skipExisting,
+          onChange: (value) => setSkipExisting(value),
+          label: "Skip records that already have a destination value"
+        },
+        void 0,
+        false,
+        {
+          fileName: "frontend/components/BulkConvertTab.js",
+          lineNumber: 310,
+          columnNumber: 21
+        },
+        this
+      ) }, void 0, false, {
+        fileName: "frontend/components/BulkConvertTab.js",
+        lineNumber: 309,
+        columnNumber: 17
       }, this),
       records && selectedTable && sourceFieldId && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { textColor: "light", size: "small", children: [
         records.length,
-        " records in table",
+        " records",
+        selectedView ? " in view" : " in table",
         " \xB7 ",
-        records.filter((r) => {
-          const v = r.getCellValue(sourceFieldId);
-          return v && v.length > 0;
-        }).length,
-        " ",
-        "with attachments"
+        (() => {
+          const withAttachments = records.filter((r) => {
+            const v = r.getCellValue(sourceFieldId);
+            return v && v.length > 0;
+          }).length;
+          const toConvert = skipExisting && destFieldId ? records.filter((r) => {
+            const v = r.getCellValue(sourceFieldId);
+            if (!v || v.length === 0) return false;
+            const dv = r.getCellValue(destFieldId);
+            if (dv && (Array.isArray(dv) ? dv.length > 0 : dv.toString().trim() !== "")) return false;
+            return true;
+          }).length : withAttachments;
+          return `${withAttachments} with attachments` + (skipExisting && destFieldId && toConvert !== withAttachments ? ` \xB7 ${toConvert} to convert` : "");
+        })()
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 273,
+        lineNumber: 321,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 272,
+        lineNumber: 320,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62844,19 +62841,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         false,
         {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 287,
+          lineNumber: 349,
           columnNumber: 17
         },
         this
       ) }, void 0, false, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 286,
+        lineNumber: 348,
         columnNumber: 13
       }, this),
       converting && totalToConvert > 0 && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.ProgressBar, { progress: progressFraction, barColor: "#2563eb" }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 300,
+          lineNumber: 362,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { size: "small", textColor: "light", marginTop: 1, children: [
@@ -62868,12 +62865,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           errorCount > 0 && ` \xB7 ${errorCount} failed`
         ] }, void 0, true, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 301,
+          lineNumber: 363,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 299,
+        lineNumber: 361,
         columnNumber: 17
       }, this),
       statusMessage && !converting && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62885,7 +62882,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           backgroundColor: "lightGray1",
           children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { fontWeight: "strong", children: statusMessage }, void 0, false, {
             fileName: "frontend/components/BulkConvertTab.js",
-            lineNumber: 317,
+            lineNumber: 379,
             columnNumber: 21
           }, this)
         },
@@ -62893,7 +62890,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         false,
         {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 311,
+          lineNumber: 373,
           columnNumber: 17
         },
         this
@@ -62901,7 +62898,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       log.length > 0 && /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Box, { marginBottom: 3, children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_ui2.Text, { fontWeight: "strong", marginBottom: 1, children: "Log" }, void 0, false, {
           fileName: "frontend/components/BulkConvertTab.js",
-          lineNumber: 324,
+          lineNumber: 386,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
@@ -62927,13 +62924,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               true,
               {
                 fileName: "frontend/components/BulkConvertTab.js",
-                lineNumber: 333,
+                lineNumber: 395,
                 columnNumber: 33
               },
               this
             ) }, idx, false, {
               fileName: "frontend/components/BulkConvertTab.js",
-              lineNumber: 332,
+              lineNumber: 394,
               columnNumber: 29
             }, this))
           },
@@ -62941,19 +62938,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           false,
           {
             fileName: "frontend/components/BulkConvertTab.js",
-            lineNumber: 325,
+            lineNumber: 387,
             columnNumber: 21
           },
           this
         )
       ] }, void 0, true, {
         fileName: "frontend/components/BulkConvertTab.js",
-        lineNumber: 323,
+        lineNumber: 385,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "frontend/components/BulkConvertTab.js",
-      lineNumber: 211,
+      lineNumber: 235,
       columnNumber: 9
     }, this);
   }
