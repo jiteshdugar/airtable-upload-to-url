@@ -1,10 +1,5 @@
 import {initializeBlock} from '@airtable/blocks/ui';
 import React from 'react';
-import './style.css';
+import UploadToUrlApp from './UploadToUrlApp';
 
-function HelloWorldApp() {
-    // YOUR CODE GOES HERE
-    return <div>Hello world 🚀</div>;
-}
-
-initializeBlock(() => <HelloWorldApp />);
+initializeBlock(() => <UploadToUrlApp />);
