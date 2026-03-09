@@ -5,6 +5,7 @@ import {
     Icon,
     Text,
     useGlobalConfig,
+    useSettingsButton,
 } from '@airtable/blocks/ui';
 
 import UploadTab from './components/UploadTab';
@@ -22,6 +23,11 @@ export default function UploadToUrlApp() {
 
     const [activeTab, setActiveTab] = useState(TABS.UPLOAD);
     const [showSettings, setShowSettings] = useState(!apiKey);
+
+    // Surface settings via the SettingsButton API (gear icon outside extension frame)
+    useSettingsButton(function () {
+        setShowSettings(!showSettings);
+    });
 
     // Show settings on first launch if no API key
     if (showSettings) {
