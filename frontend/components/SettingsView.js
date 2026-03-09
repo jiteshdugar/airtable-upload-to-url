@@ -10,6 +10,7 @@ import {
     Select,
     Text,
     useGlobalConfig,
+    useSession,
 } from '@airtable/blocks/ui';
 
 const EXPIRY_OPTIONS = [
@@ -21,8 +22,13 @@ const EXPIRY_OPTIONS = [
 
 export default function SettingsView({onClose}) {
     const globalConfig = useGlobalConfig();
+    const session = useSession();
     const savedApiKey = globalConfig.get('apiKey') || '';
     const savedDefaultExpiry = globalConfig.get('defaultExpiry') || 'never';
+
+    // Only editors and above can update GlobalConfig
+    const globalConfigPermCheck = globalConfig.checkPermissionsForSet();
+    const canUpdateGlobalConfig = globalConfigPermCheck.hasPermission;
 
     const [apiKey, setApiKey] = useState(savedApiKey);
     const [defaultExpiry, setDefaultExpiry] = useState(savedDefaultExpiry);
@@ -71,6 +77,12 @@ export default function SettingsView({onClose}) {
 
     async function saveSettings() {
         if (validationState !== 'valid' && validationState !== 'saved') {
+            return;
+        }
+
+        if (!canUpdateGlobalConfig) {
+            setErrorMessage(globalConfigPermCheck.reasonDisplayString);
+            setValidationState('invalid');
             return;
         }
 
@@ -180,10 +192,15 @@ export default function SettingsView({onClose}) {
             <Button
                 onClick={saveSettings}
                 variant="primary"
-                disabled={validationState !== 'valid' && validationState !== 'saved'}
+                disabled={!canUpdateGlobalConfig || (validationState !== 'valid' && validationState !== 'saved')}
             >
                 Save Settings
             </Button>
+            {!canUpdateGlobalConfig && (
+                <Text textColor="#ef4444" size="small" marginTop={2}>
+                    {globalConfigPermCheck.reasonDisplayString}
+                </Text>
+            )}
         </Box>
     );
 }

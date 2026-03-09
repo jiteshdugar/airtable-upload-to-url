@@ -11,6 +11,7 @@ import {
     useBase,
     useGlobalConfig,
     useRecords,
+    useSession,
 } from '@airtable/blocks/ui';
 import {FieldType} from '@airtable/blocks/models';
 import {cursor} from '@airtable/blocks';
@@ -26,11 +27,22 @@ const EXPIRY_OPTIONS = [
 export default function UploadTab() {
     const base = useBase();
     const globalConfig = useGlobalConfig();
+    const session = useSession();
     const apiKey = globalConfig.get('apiKey');
     const defaultExpiry = globalConfig.get('defaultExpiry') || 'never';
 
     const activeTable = base.getTableByIdIfExists(cursor.activeTableId);
-    const records = useRecords(activeTable);
+    const destFieldId = globalConfig.get('destUrlFieldId');
+
+    // Only load the fields we actually need (destination field) to limit data loaded
+    const recordQueryOpts = destFieldId ? {fields: [destFieldId]} : {fields: []};
+    const records = useRecords(activeTable, recordQueryOpts);
+
+    // Check if user has permission to update records
+    const updateRecordCheckResult = activeTable
+        ? activeTable.checkPermissionsForUpdateRecord()
+        : {hasPermission: false, reasonDisplayString: 'No active table selected.'};
+    const canUpdateRecords = updateRecordCheckResult.hasPermission;
 
     const [selectedRecordId, setSelectedRecordId] = useState(null);
     const [file, setFile] = useState(null);
@@ -150,15 +162,23 @@ export default function UploadTab() {
             setResultUrl(publicUrl);
 
             // Write to record if one is selected and a destination field is configured
-            const destFieldId = globalConfig.get('destUrlFieldId');
-
             if (selectedRecordId && destFieldId && activeTable) {
                 const field = activeTable.getFieldByIdIfExists(destFieldId);
                 if (field) {
-                    await activeTable.updateRecordAsync(selectedRecordId, {
-                        [destFieldId]: publicUrl,
-                    });
-                    setResultMessage('URL written to record successfully!');
+                    const writeCheck = activeTable.checkPermissionsForUpdateRecord(
+                        selectedRecordId,
+                        {[destFieldId]: publicUrl}
+                    );
+                    if (!writeCheck.hasPermission) {
+                        setResultMessage(
+                            `Upload complete, but could not save to record: ${writeCheck.reasonDisplayString}`
+                        );
+                    } else {
+                        await activeTable.updateRecordAsync(selectedRecordId, {
+                            [destFieldId]: publicUrl,
+                        });
+                        setResultMessage('URL written to record successfully!');
+                    }
                 } else {
                     setResultMessage('Upload complete! Select a destination field to save to record.');
                 }
@@ -276,8 +296,14 @@ export default function UploadTab() {
                             globalConfigKey="destUrlFieldId"
                             allowedTypes={[FieldType.URL, FieldType.SINGLE_LINE_TEXT]}
                             placeholder="Pick a URL or text field"
+                            disabled={!canUpdateRecords}
                         />
                     </FormField>
+                    {!canUpdateRecords && (
+                        <Text textColor="#ef4444" size="small" marginTop={1}>
+                            {updateRecordCheckResult.reasonDisplayString}
+                        </Text>
+                    )}
                 </Box>
             )}
 

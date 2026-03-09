@@ -15,6 +15,7 @@ import {
     useBase,
     useGlobalConfig,
     useRecords,
+    useSession,
 } from '@airtable/blocks/ui';
 import {FieldType} from '@airtable/blocks/models';
 
@@ -30,6 +31,7 @@ const MAX_RECORDS_PER_UPDATE = 50;
 export default function BulkConvertTab() {
     const base = useBase();
     const globalConfig = useGlobalConfig();
+    const session = useSession();
     const apiKey = globalConfig.get('apiKey');
     const defaultExpiry = globalConfig.get('defaultExpiry') || 'never';
 
@@ -46,7 +48,16 @@ export default function BulkConvertTab() {
         ? selectedTable.getViewByIdIfExists(selectedViewId)
         : null;
 
-    const records = useRecords(selectedView || selectedTable);
+    // Only load the fields we need to limit data loaded
+    const fieldsToLoad = [sourceFieldId, destFieldId].filter(Boolean);
+    const recordQueryOpts = fieldsToLoad.length > 0 ? {fields: fieldsToLoad} : {fields: []};
+    const records = useRecords(selectedView || selectedTable, recordQueryOpts);
+
+    // Check if user has permission to update records
+    const updateCheckResult = selectedTable
+        ? selectedTable.checkPermissionsForUpdateRecord()
+        : {hasPermission: false, reasonDisplayString: 'No table selected.'};
+    const canUpdateRecords = updateCheckResult.hasPermission;
 
     const [expiry, setExpiry] = useState(defaultExpiry);
     const [skipExisting, setSkipExisting] = useState(true);
@@ -113,6 +124,12 @@ export default function BulkConvertTab() {
 
         if (!sourceField || !destField) {
             setStatusMessage('Selected fields no longer exist.');
+            return;
+        }
+
+        const permCheck = selectedTable.checkPermissionsForUpdateRecord();
+        if (!permCheck.hasPermission) {
+            setStatusMessage(permCheck.reasonDisplayString);
             return;
         }
 
@@ -349,11 +366,16 @@ export default function BulkConvertTab() {
                 <Button
                     onClick={handleConvertAll}
                     variant="primary"
-                    disabled={converting || !selectedTable || !sourceFieldId || !destFieldId}
+                    disabled={converting || !selectedTable || !sourceFieldId || !destFieldId || !canUpdateRecords}
                     width="100%"
                 >
                     {converting ? 'Converting...' : 'Convert All'}
                 </Button>
+                {selectedTable && !canUpdateRecords && (
+                    <Text textColor="#ef4444" size="small" marginTop={1}>
+                        {updateCheckResult.reasonDisplayString}
+                    </Text>
+                )}
             </Box>
 
             {/* Progress Bar */}
