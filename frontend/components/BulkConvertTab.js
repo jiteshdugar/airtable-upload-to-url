@@ -83,7 +83,9 @@ export default function BulkConvertTab() {
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
             const errMsg = errData.message || errData.error || errData.detail || JSON.stringify(errData);
-            if (response.status === 429) {
+            if (response.status === 413) {
+                throw new Error(`File too large: ${errMsg}`);
+            } else if (response.status === 429) {
                 throw new Error(`Rate limit exceeded: ${errMsg}`);
             } else if (response.status === 402 || response.status === 403) {
                 throw new Error(`API credits exhausted or unauthorized: ${errMsg}`);
