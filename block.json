@@ -1,6 +1,7 @@
 {
   "name": "Get Public URL",
   "id": "blkUcnR99rZ49UOic",
+  "remoteId": "appGzxJSpeOxXD69G/blkUcnR99rZ49UOic",
   "frontendEntry": "frontend/index.js",
   "authorName": "Upload to URL",
   "description": "Instantly convert Airtable attachments into public URLs."

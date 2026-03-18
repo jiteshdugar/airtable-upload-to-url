@@ -8,7 +8,7 @@
         "build": "block build"
     },
     "dependencies": {
-        "@airtable/blocks": "^1.5.1",
+        "@airtable/blocks": "^1.19.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     }
